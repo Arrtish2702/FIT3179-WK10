@@ -29,7 +29,11 @@
             "filter": "datum.year == 2020"
           }
         ],
-        "mark": {"type": "geoshape"},
+        "mark": {
+          "type": "geoshape",
+          "stroke": "black",       
+          "strokeWidth": 0.5     
+        },
         "encoding": {
           "color": {
             "field": "population",
@@ -43,5 +47,4 @@
         }
       }
     ]
-  }
-  
+}

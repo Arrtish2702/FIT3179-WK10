@@ -11,8 +11,6 @@
         "strokeWidth": 2      
         }
     },
-      
-      
     "data": {
       "url": "https://raw.githubusercontent.com/Arrtish2702/FIT3179-WK10/main/population_state_with_year.csv",
       "format": {"type": "csv"}
