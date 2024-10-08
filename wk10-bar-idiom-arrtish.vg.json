@@ -1,34 +1,60 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Population of Malaysian States (2020) - Bar Chart with Interactions",
+    "title": "Population of Malaysian States - Bar Chart with Interactions",
     "width": 800,
     "height": 400,
     "config": {
       "background": "#a8cde0"
     },
     "data": {
-      "url": "https://raw.githubusercontent.com/Arrtish2702/FIT3179-WK9/main/population_state_with_year_filtered.csv",
+      "url": "https://raw.githubusercontent.com/Arrtish2702/FIT3179-WK10/main/population_state_with_year.csv",
       "format": {"type": "csv"}
     },
     "transform": [
       {
-        "filter": "datum.year == 2020"
+        "filter": "datum.year == yearSelection"
+      },
+      {
+        "filter": "datum.sex == 'both'"
+      },
+      {
+        "filter": "datum.age == 'overall'"
+      },
+      {
+        "filter": "datum.ethnicity == 'overall'"
       }
     ],
     "params": [
       {
         "name": "yearSelection",
-        "value": 2020,
+        "value": 2000,
         "bind": {
-          "input": "select",
-          "options": [2018, 2019, 2020],
+          "input": "range",
+          "min": 1970,
+          "max": 2024,
+          "step": 1,
           "name": "Select Year: "
+        }
+      },
+      {
+        "name": "play",
+        "value": false,
+        "bind": {
+          "input": "checkbox",
+          "name": "Play Animation: "
         }
       }
     ],
-    "transform": [
+    "signals": [
       {
-        "filter": "datum.year == yearSelection"
+        "name": "play",
+        "update": "if(play, (yearSelection + 1) > 2024 ? 1970 : yearSelection + 1, yearSelection)",
+        "on": [
+          {
+            "events": {"signal": "play"},
+            "update": "yearSelection"
+          }
+        ]
       }
     ],
     "layer": [
@@ -38,13 +64,15 @@
           "x": {
             "field": "state",
             "type": "nominal",
-            "sort": "-y",
             "axis": {"title": "State"}
           },
           "y": {
             "field": "population",
             "type": "quantitative",
-            "axis": {"title": "Population"}
+            "axis": {"title": "Population"},
+            "scale": {
+              "domain": [0, 8000]
+            }
           },
           "color": {
             "field": "population",
@@ -58,39 +86,22 @@
             {"field": "year", "type": "nominal", "title": "Year"}
           ]
         }
-      },
+      }
+    ],
+    "signals": [
       {
-        "mark": {
-          "type": "rule",
-          "color": "black"
-        },
-        "encoding": {
-          "y": {
-            "aggregate": "max",
-            "field": "population",
-            "type": "quantitative"
-          }
-        }
-      },
-      {
-        "mark": {
-          "type": "text",
-          "align": "left",
-          "dx": 5,
-          "dy": -5
-        },
-        "encoding": {
-          "y": {
-            "aggregate": "max",
-            "field": "population",
-            "type": "quantitative"
+        "name": "timer",
+        "value": 0,
+        "on": [
+          {
+            "events": {"signal": "play"},
+            "update": "if(play, timer + 1, 0)"
           },
-          "text": {
-            "aggregate": "max",
-            "field": "population",
-            "type": "quantitative"
+          {
+            "events": {"signal": "timer"},
+            "update": "if(timer > 0, yearSelection, yearSelection + 1)"
           }
-        }
+        ]
       }
     ]
   }
