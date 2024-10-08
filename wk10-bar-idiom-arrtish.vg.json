@@ -27,7 +27,7 @@
     "params": [
       {
         "name": "yearSelection",
-        "value": 2000,
+        "value": 2000, 
         "bind": {
           "input": "range",
           "min": 1970,
@@ -35,26 +35,6 @@
           "step": 1,
           "name": "Select Year: "
         }
-      },
-      {
-        "name": "play",
-        "value": false,
-        "bind": {
-          "input": "checkbox",
-          "name": "Play Animation: "
-        }
-      }
-    ],
-    "signals": [
-      {
-        "name": "play",
-        "update": "if(play, (yearSelection + 1) > 2024 ? 1970 : yearSelection + 1, yearSelection)",
-        "on": [
-          {
-            "events": {"signal": "play"},
-            "update": "yearSelection"
-          }
-        ]
       }
     ],
     "layer": [
@@ -71,7 +51,7 @@
             "type": "quantitative",
             "axis": {"title": "Population"},
             "scale": {
-              "domain": [0, 8000]
+              "domain": [0, 8000] 
             }
           },
           "color": {
@@ -86,22 +66,6 @@
             {"field": "year", "type": "nominal", "title": "Year"}
           ]
         }
-      }
-    ],
-    "signals": [
-      {
-        "name": "timer",
-        "value": 0,
-        "on": [
-          {
-            "events": {"signal": "play"},
-            "update": "if(play, timer + 1, 0)"
-          },
-          {
-            "events": {"signal": "timer"},
-            "update": "if(timer > 0, yearSelection, yearSelection + 1)"
-          }
-        ]
       }
     ]
   }

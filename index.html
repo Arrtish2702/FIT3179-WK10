@@ -8,23 +8,26 @@
   
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-
-
 </head>
 <body>
   
-<div id="choropleth_map"></div>
+  <!-- Separate containers for each visualization -->
+  <div id="choropleth_map"></div>
+  <div id="bar_chart"></div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
+    // Load the choropleth map
     var spec1 = "https://raw.githubusercontent.com/Arrtish2702/FIT3179-WK9/main/wk10-map-arrtish.vg.json";
-    vegaEmbed('#vis', spec1).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    vegaEmbed('#choropleth_map', spec1).then(function(result) {
+      // Access the Vega view instance
     }).catch(console.error);
+
+    // Load the bar chart
     var spec2 = "https://raw.githubusercontent.com/Arrtish2702/FIT3179-WK9/main/wk10-bar-idiom-arrtish.vg.json";
-    vegaEmbed('#vis', spec2).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    vegaEmbed('#bar_chart', spec2).then(function(result) {
+      // Access the Vega view instance
     }).catch(console.error);
-</script>
+  </script>
 
 </body>
 </html>
