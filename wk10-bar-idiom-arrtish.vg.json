@@ -57,7 +57,7 @@
           "color": {
             "field": "population",
             "type": "quantitative",
-            "scale": {"scheme": "reds"},
+            "scale": {"scheme":"category20"},
             "legend": {"title": "Population"}
           },
           "tooltip": [
