@@ -3,9 +3,16 @@
     "title": "Population of Malaysian States - Bar Chart with Interactions",
     "width": 800,
     "height": 400,
+    
     "config": {
-      "background": "#a8cde0"
+        "background": "#ffffff",
+        "view": {
+        "stroke": "#000000",  
+        "strokeWidth": 2      
+        }
     },
+      
+      
     "data": {
       "url": "https://raw.githubusercontent.com/Arrtish2702/FIT3179-WK10/main/population_state_with_year.csv",
       "format": {"type": "csv"}
@@ -54,12 +61,12 @@
               "domain": [0, 8000] 
             }
           },
-          "color": {
-            "field": "population",
-            "type": "quantitative",
-            "scale": {"scheme":"category20"},
-            "legend": {"title": "Population"}
-          },
+        "color": {
+            "field": "state",
+            "type": "nominal",
+            "scale": {"scheme":"accent"},
+            "legend": {"title": "State"}
+        },
           "tooltip": [
             {"field": "state", "type": "nominal", "title": "State"},
             {"field": "population", "type": "quantitative", "title": "Population"},
